@@ -123,6 +123,19 @@ apply_severity_rules(triage: dict, alert: dict) -> dict
 
 ---
 
+## 제출
+
+```bash
+실습 코드 완성
+git add {변경한 파일들}
+git commit -m "day1 완료" # 커밋 메시지는 자유
+git push # 커밋 push
+git tag day01-submit # 태그 붙임
+git push origin day01-submit # 태그 push
+```
+
+> **tag를 반드시 넣어주셔야 채점이 진행됩니다.**
+> 규칙에 맞지 않으면 채점기가 그 커밋을 그냥 지나갑니다.
 ## 제출 전 확인
 
 - [ ] `python scripts/grade.py --day 1`이 통과로 나온다
