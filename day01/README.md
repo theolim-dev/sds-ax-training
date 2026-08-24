@@ -123,21 +123,6 @@ apply_severity_rules(triage: dict, alert: dict) -> dict
 
 ---
 
-## 제출
-
-```bash
-# 1) 로컬에서 먼저 확인
-python scripts/grade.py --day 1
-
-# 2) 통과하면 커밋
-git add day01/ eval_set.json
-git commit -m "[제출] Day1"
-git push
-```
-
-> **커밋 메시지 첫 줄은 반드시 `[제출] Day1`로 시작해야 채점이 실행됩니다.**
-> 규칙에 맞지 않으면 채점기가 그 커밋을 그냥 지나갑니다. 일반 작업 커밋에는 다른 문구를 쓰세요.
-
 ## 제출 전 확인
 
 - [ ] `python scripts/grade.py --day 1`이 통과로 나온다
