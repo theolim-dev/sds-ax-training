@@ -4,5 +4,49 @@
     "question": "여기에 문서에 그대로 적힌 내용을 묻는 질문을 쓰세요",
     "type": "fact",
     "expected_source": "leave_policy.md"
+  },
+  {
+    "id": "d3-01",
+    "question": "장애를 조사할 때 왜 배포 이력부터 확인하나요?",
+    "type": "no_tool",
+    "expected_tools": [],
+    "note": "조사 절차를 묻는 일반 질문입니다. 도구를 부르지 않고 바로 답해야 합니다."
+  },
+  {
+    "id": "d3-02",
+    "question": "payment-api의 현재 오류율과 p99 지연은 얼마인가요?",
+    "type": "single_tool",
+    "expected_tools": ["get_metrics"],
+    "expected_contains": ["12.4%", "3400"]
+  },
+  {
+    "id": "d3-03",
+    "question": "payment-api에 최근 배포가 있었나요? 있었다면 언제인가요?",
+    "type": "single_tool",
+    "expected_tools": ["get_deploy_history"],
+    "expected_contains": ["v2.14.1", "2026-08-11T02:58:00+09:00"]
+  },
+  {
+    "id": "d3-04",
+    "question": "payment-api에서 5xx가 급증했습니다. 최근 배포 시각 전후 로그를 확인해 원인을 알려 주세요.",
+    "type": "multi_tool",
+    "expected_tools": ["get_deploy_history", "get_logs"],
+    "expected_contains": ["NullPointerException", "PaymentValidator"],
+    "note": "배포 시각이 로그 조회의 since 인자로 넘어가야 원인에 도달합니다. 연쇄 문항입니다."
+  },
+  {
+    "id": "d3-05",
+    "question": "auth-service는 지금 정상인가요? 배포 이력과 지표를 함께 확인해 주세요.",
+    "type": "multi_tool",
+    "expected_tools": ["get_deploy_history", "get_metrics"],
+    "expected_contains": ["정상", "v1.9.3"]
+  },
+  {
+    "id": "d3-06",
+    "question": "ledger-api의 지표를 보여 주세요.",
+    "type": "single_tool",
+    "expected_tools": ["get_metrics"],
+    "expected_contains": ["없습니다"],
+    "note": "고정 데이터에 없는 서비스입니다. 지어내지 않고 없다고 답하는지 봅니다."
   }
 ]

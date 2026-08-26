@@ -19,8 +19,14 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from langchain_core.messages import AIMessage, SystemMessage
 from langchain_core.tools import tool
+from langgraph.graph import END, START, MessagesState, StateGraph
+from langgraph.prebuilt import ToolNode
 from pydantic import BaseModel, Field
+
+# langgraph·langchain_core는 모듈 최상단에서 불러도 자격증명을 요구하지 않습니다.
+# 반면 실제 모델(langchain_aws)은 _default_llm 안에서만 만듭니다.
 
 MODEL_ID = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
 REGION = "us-east-1"
@@ -225,10 +231,6 @@ def build_agent(llm=None):
     심화 파트의 should_stop 을 agent 노드 맨 앞에서 부르기 때문에,
     모델이 아무리 도구를 더 부르려 해도 MAX_TOOL_CALLS 를 넘을 수 없습니다.
     """
-    from langchain_core.messages import AIMessage, SystemMessage
-    from langgraph.graph import END, START, MessagesState, StateGraph
-    from langgraph.prebuilt import ToolNode
-
     llm = llm or _default_llm()
     model = llm.bind_tools(TOOLS)
 
